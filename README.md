@@ -7,6 +7,9 @@
 This is a **Lightrays Deobfuscate** tool created and written to:
 - Deobfuscate Lightray :>
 - The source code is written in JavaScript
+### Input File
+
+`input.lua` is the file output obfuscated by Lightray, containing a **22 KB blob**. After decoding, it becomes **17 KB**, so I think something might be missing.
 
 And
 
