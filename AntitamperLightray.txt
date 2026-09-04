@@ -1,0 +1,535 @@
+-- WAKE UP, anti tamper leak by @jack3234_
+-- pls dont deleted this comment lua :(
+
+pcall(loadstring, [=[ --[[ 
+
+
+		
+
+                                      =++++**********+++++=
+                                *++**************************+++*
+                            ++*********####%%%%%%%%%%%%%##********++
+                          ++******##%%%%%%%%%%%%%%%%%%%%%%%%%#*******++
+                       ++*****##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##******+=                               *+
+                     ++*****##%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%******++                               =+
+                   ++*****##########%#%##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#******                               +=
+                  +*****#####################%####%%%##%%%%%%%%%%%%%%%%##*****+                       **    +
+                +******######+-+*####*=:-==--==*#############%%%###%#%%%%#*****+*                  +++  +  ++
+               +******###*-+%%%@%%@%%%%%%*+########++######################******=                     =+
+              +*******##+*%%@@@@@@@@@@@%%%%+########=*######################******+                   ++
+             +*********+#%%@@@@@@@@@@@@%%@@%+######*+=-=*####################*****++                 ++
+             +*******#+*%%%@@@@@@@@@%%@#=-=%#+###=#%%%%%@#+-+*###############******+         +++    ++
+            +********#+*%%%@@@@@@@@%-+:. .-+%+##+#%#=-=%%@@@@@@%*=--=+**#####******++     ++*####%#+=+
+            +**********+#%%%@@@@@@@@%-==++-%**##+#:*- .=-@@@@@@@@@@@@@%%+####*******+    ++**####*+*###*++
+           ++****####%*=+%%%%@@@@@@@@@@%%%%#*###+#---.+*=@@@@@@@@@@@@@@%%=#*********+     ++****++*#######*++
+           +********#####*##%%%%%%%%%%%%%#+*%####+#%%%%%%@@@@@@@@@@@@@@%%*+**********        =+=*############+
+           +*****+*+***####**##%%%%%%##*+*###%#%%**#%%@@@@@@@@@@@@@@@%%%%*+**********  ++   ===*+++############+
+           +*********#**#######**++**#####%%%%%%%%#+#%%%%@@@@@@@@@@%%%##*+###*******+    ===  +#%###+******#####*+
+            +******#*+####################%%%%%%%%#%#=*%%%%%%%%%%%%%%#*=***###******+        **%###+*%%%#########**
+            *********#+*###################%%%%%%%#####*=+###%##%#*==*####*********+#         ****#################+
+             +******###*+######################%##############**#######*************           +*#####*++###########++
+             +*******###*--=##########################################************++           +##**%%%%#############++
+              +*******###*-:..-=+*#########################################*******+            +**####################+
+               +#********##+........:-=*###################################******=              *####################**+
+                +********##**=............:-+##########################**#*****++               +#####+##############***+
+                 =********###**-...............:-+#####################*******++                *+%###+*###########*****+
+                   +******##*###*:................:-++++++**########*********+                     +*+++########********+
+                     *****#*####**+====:......:-+*################**##*****+                            +*#########******
+                      +****#**##*****=-:---+*###################**#####**+                                 +*#%%%%%##*+
+                         *************##*################**##########*+#                                       =+++
+                            +**#*************###############%%%%##*++
+                                **************#########%%%%###*+*
+                                    =+******************++=		
+
+
+
+      ]] return setfenv(function(...) return hsooKNVxjL(...) end, setmetatable({ ['hsooKNVxjL'] = ... }, { __index = getfenv(...) })) ]=], "Lightray")
+
+-- This anti tamper was leak and deobfuscate by @jack3234 pls donts deleted
+
+local function fail()
+  error("environment check failed", 2)
+end
+
+local function expectMessage(result, msg)
+  if result ~= msg then
+    fail()
+  end
+end
+
+local function checkTypes()
+  assert(type(table) == "table")
+  assert(type(table.unpack) == "function")
+  assert(type(table.insert) == "function")
+  assert(type(string.byte) == "function")
+  assert(type(math.random) == "function")
+  assert(type(coroutine.create) == "function")
+  assert(type(task.wait) == "function")
+  assert(typeof(nil) == "nil")
+  assert(typeof(true) == "boolean")
+  assert(typeof(1) == "number")
+  assert(typeof("s") == "string")
+  assert(typeof({}) == "table")
+  assert(typeof(print) == "function")
+  local th = coroutine.running()
+  assert(typeof(th) == "thread" or typeof(th) == "nil")
+  assert(typeof(buffer.create(1)) == "buffer")
+end
+-- This anti tamper was leak and deobfuscate by @jack3234 pls donts deleted
+local function checkTweenInfo()
+  local empty = TweenInfo.new()
+  assert(typeof(empty) == "TweenInfo")
+  assert(type(empty.Time) == "number")
+
+  local ti = TweenInfo.new(2, Enum.EasingStyle.Bounce, Enum.EasingDirection.InOut, 3, true, 0.5)
+  assert(typeof(ti) == "TweenInfo")
+  assert(ti.Time == 2)
+  assert(ti.EasingStyle == Enum.EasingStyle.Bounce)
+  assert(ti.EasingDirection == Enum.EasingDirection.InOut)
+  assert(ti.RepeatCount == 3)
+  assert(ti.Reverses)
+  assert(math.abs(ti.DelayTime - 0.5) < 1e-6)
+
+  for _, style in Enum.EasingStyle:GetEnumItems() do
+    for _, dir in Enum.EasingDirection:GetEnumItems() do
+      assert(typeof(TweenInfo.new(1, style, dir)) == "TweenInfo")
+    end
+  end
+end
+
+local function checkVector3()
+  local v = Vector3.new(3, 4, 0)
+  assert(typeof(v) == "Vector3")
+  assert(v.X == 3 and v.Y == 4 and v.Z == 0)
+  assert(math.abs(v.Magnitude - 5) < 1e-6)
+
+  local u = v.Unit
+  assert(math.abs(u.Magnitude - 1) < 1e-6)
+  assert(math.abs(u.X - 0.6) < 0.0001)
+  assert(math.abs(u.Y - 0.8) < 0.0001)
+
+  assert(typeof(Vector3.zero) == "Vector3")
+  assert(Vector3.zero.X == 0 and Vector3.zero.Y == 0 and Vector3.zero.Z == 0)
+  assert(typeof(Vector3.one) == "Vector3")
+  assert(Vector3.one.X == 1 and Vector3.one.Y == 1 and Vector3.one.Z == 1)
+  assert(typeof(Vector3.xAxis) == "Vector3")
+  assert(typeof(Vector3.yAxis) == "Vector3")
+  assert(typeof(Vector3.zAxis) == "Vector3")
+
+  assert(Vector3.xAxis:Dot(Vector3.yAxis) == 0)
+  assert(Vector3.xAxis:Dot(Vector3.xAxis) == 1)
+
+  local c = Vector3.xAxis:Cross(Vector3.yAxis)
+  assert(math.abs(c.X) < 1e-6 and math.abs(c.Y) < 1e-6)
+  assert(math.abs(c.Z - 1) < 1e-6)
+  assert(math.abs(Vector3.zero:Lerp(Vector3.one, 0.5).X - 0.5) < 1e-6)
+
+  assert(v:FuzzyEq(Vector3.new(3.0000001, 4, 0), 1e-5))
+  assert(not v:FuzzyEq(Vector3.new(3.1, 4, 0), 1e-5))
+end
+-- WAKE UP, anti tamper leak by @jack3234_
+
+local function emptyFn()
+end
+
+local function checkIntVectors()
+  local v = Vector2int16.new(100, 200)
+  assert(typeof(v) == "Vector2int16")
+  assert(v.X == 100 and v.Y == 200)
+  assert(Vector2int16.new(-32768, -1).X == -32768 and Vector2int16.new(-32768, -1).Y == -1)
+  assert(Vector2int16.new(32767, 32767).X == 32767 and Vector2int16.new(32767, 32767).Y == 32767)
+
+  local sum = v + Vector2int16.new(10, 20)
+  assert(typeof(sum) == "Vector2int16")
+  assert(sum.X == 110 and sum.Y == 220)
+  assert((v - Vector2int16.new(50, 100)).X == 50 and (v - Vector2int16.new(50, 100)).Y == 100)
+  assert((v * Vector2int16.new(2, 3)).X == 200 and (v * Vector2int16.new(2, 3)).Y == 600)
+
+  local v3 = Vector3int16.new(10, 20, 30)
+  assert(typeof(v3) == "Vector3int16")
+  assert(v3.X == 10 and v3.Y == 20 and v3.Z == 30)
+  local s3 = v3 + Vector3int16.new(-100, -200, -300)
+  assert(typeof(s3) == "Vector3int16")
+  assert(s3.X == -90 and s3.Y == -180 and s3.Z == -270)
+  local d3 = v3 - Vector3int16.new(0, 0, 0)
+  assert(d3.X == 10 and d3.Y == 20 and d3.Z == 30)
+end
+-- pls dont deleted this comment lua :(
+
+local function checkUtf8()
+  assert(type(utf8) == "table")
+  assert(type(utf8.char) == "function")
+  assert(type(utf8.charpattern) == "string" and #utf8.charpattern > 0)
+  assert(type(utf8.codepoint) == "function")
+  assert(type(utf8.codes) == "function")
+  assert(type(utf8.len) == "function")
+  assert(type(utf8.offset) == "function")
+
+  assert(utf8.char(65) == "A")
+  assert(utf8.char(97) == "a")
+  assert(utf8.char(48) == "0")
+
+  local snowman = utf8.char(9731)
+  assert(type(snowman) == "string" and #snowman > 1)
+  local star = utf8.char(9733)
+  assert(type(star) == "string" and #star > 1)
+  assert(utf8.codepoint(snowman, 1) == 9731)
+
+  local hello = utf8.char(72, 101, 108, 108, 111)
+  local codes = {}
+  for _, cp in utf8.codes(hello) do
+    table.insert(codes, cp)
+  end
+  assert(#codes == 5)
+  assert(codes[1] == 72 and codes[5] == 111)
+
+  assert(utf8.len("_-_2_") == 5)
+  assert(utf8.len("") == 0)
+
+  local mixed = utf8.char(9731, 65, 9733)
+  assert(utf8.len(mixed) == 3)
+  local off = utf8.offset(mixed, 2)
+  assert(type(off) == "number" and off > 1)
+
+  local chars = {}
+  for ch in mixed:gmatch(utf8.charpattern) do
+    table.insert(chars, ch)
+  end
+  assert(#chars == 3)
+end
+
+local function checkWeakTables()
+  local weakv = setmetatable({}, { __mode = "v" })
+  weakv[1] = { true }
+  assert(weakv[1] ~= nil)
+  assert(weakv[1][1] == true)
+  assert(type(weakv) == "table")
+
+  local weakk = setmetatable({}, { __mode = "k" })
+  local key = {}
+  weakk[key] = true
+  assert(weakk[key] == true)
+  assert(type(weakk) == "table")
+
+  local weakkv = setmetatable({}, { __mode = "kv" })
+  assert(type(weakkv) == "table")
+  assert(getmetatable(weakkv).__mode == "kv")
+end
+-- This anti tamper was leak and deobfuscate by @jack3234 pls donts deleted
+
+local function checkDataModel()
+  if type(game.PlaceId) ~= "number" then
+    return
+  end
+  if type(game.GameId) ~= "number" then
+    return
+  end
+  if game.PlaceId == 0 then
+    return
+  end
+  if game.GameId == 0 then
+    return
+  end
+  if game.PlaceId < 0 then
+    return
+  end
+  if game.GameId < 0 then
+    return
+  end
+  if type(game.PlaceVersion) ~= "number" then
+    return
+  end
+  if game.PlaceVersion < 0 then
+    return
+  end
+  if typeof(game) ~= "Instance" then
+    return
+  end
+  if not game:IsA("DataModel") then
+    return
+  end
+end
+
+local function checkHttpService()
+  local http = game:GetService("HttpService")
+  assert(http ~= nil)
+  assert(http:IsA("HttpService"))
+
+  local payload = { "", 1, true, { "a", "b" } }
+  local encoded = http:JSONEncode(payload)
+  assert(type(encoded) == "string" and #encoded > 0)
+  assert(encoded:find("") ~= nil)
+
+  local decoded = http:JSONDecode(encoded)
+  assert(type(decoded) == "table")
+  assert(decoded[1] == "")
+  assert(decoded[2] == 1)
+  assert(decoded[3] == true)
+  assert(type(decoded[4]) == "table" and #decoded[4] == 2)
+
+  local nested = { a = { b = { c = 42 } } }
+  assert(http:JSONDecode(http:JSONEncode(nested)).a.b.c == 42)
+
+  local guid = http:GenerateGUID(false)
+  assert(type(guid) == "string" and #guid == 36)
+end
+-- WAKE UP, anti tamper leak by @jack3234_
+-- pls dont deleted this comment lua :(
+
+local function checkTask()
+  assert(type(task) == "table")
+  assert(type(task.wait) == "function")
+  assert(type(task.spawn) == "function")
+  assert(type(task.defer) == "function")
+  assert(type(task.delay) == "function")
+  assert(type(task.cancel) == "function")
+
+  local waited = task.wait(0.05)
+  assert(type(waited) == "number" and waited >= 0.04)
+
+  assert(type(task.spawn(function() end)) == "thread")
+
+  local flag = false
+  task.delay(0.05, function()
+    flag = true
+  end)
+  assert(flag == false)
+  task.wait(0.1)
+  assert(flag == true)
+
+  local cancelled = false
+  local job = task.delay(1, function()
+    cancelled = true
+  end)
+  task.cancel(job)
+  task.wait(0.05)
+  assert(cancelled == false)
+end
+
+local function checkUserInputService()
+  local uis = game:GetService("UserInputService")
+  if not uis then
+    fail()
+  end
+  assert(type(uis.KeyboardEnabled) == "boolean")
+  assert(type(uis.MouseEnabled) == "boolean")
+  assert(type(uis.TouchEnabled) == "boolean")
+  assert(type(uis.GamepadEnabled) == "boolean")
+  assert(type(uis.AccelerometerEnabled) == "boolean")
+  assert(type(uis.GyroscopeEnabled) == "boolean")
+
+  for _, key in {
+    Enum.KeyCode.W,
+    Enum.KeyCode.A,
+    Enum.KeyCode.S,
+    Enum.KeyCode.D,
+    Enum.KeyCode.Space,
+    Enum.KeyCode.LeftShift,
+    Enum.KeyCode.Return,
+  } do
+    assert(type(uis:IsKeyDown(key)) == "boolean")
+  end
+
+  for _, btn in {
+    Enum.UserInputType.MouseButton1,
+    Enum.UserInputType.MouseButton2,
+    Enum.UserInputType.MouseButton3,
+  } do
+    assert(type(uis:IsMouseButtonPressed(btn)) == "boolean")
+  end
+
+  assert(type(uis:GetKeysPressed()) == "table")
+end
+
+local function checkUDim2()
+  local u = UDim2.new(1, 10, 0.5, -5)
+  assert(typeof(u) == "UDim2")
+  assert(u.X.Scale == 1 and u.X.Offset == 10)
+  assert(u.Y.Scale == 0.5 and u.Y.Offset == -5)
+
+  local fromScale = UDim2.fromScale(0.5, 0.75)
+  assert(fromScale.X.Scale == 0.5 and fromScale.X.Offset == 0)
+  assert(fromScale.Y.Scale == 0.75 and fromScale.Y.Offset == 0)
+
+  local fromOffset = UDim2.fromOffset(100, 200)
+  assert(fromOffset.X.Scale == 0 and fromOffset.X.Offset == 100)
+  assert(fromOffset.Y.Scale == 0 and fromOffset.Y.Offset == 200)
+
+  local sum = fromScale + fromOffset
+  assert(typeof(sum) == "UDim2")
+  assert(sum.X.Scale == 0.5 and sum.X.Offset == 100)
+
+  local diff = UDim2.fromOffset(200, 200) - UDim2.fromOffset(50, 50)
+  assert(diff.X.Offset == 150 and diff.Y.Offset == 150)
+  assert(math.abs(UDim2.fromScale(0, 0):Lerp(UDim2.fromScale(1, 1), 0.5).X.Scale - 0.5) < 1e-6)
+  assert(UDim2.fromOffset(10, 20) == UDim2.new(0, 10, 0, 20))
+end
+-- This anti tamper was leak and deobfuscate by @jack3234 pls donts deleted
+
+local function checkTweenService()
+  local ts = game:GetService("TweenService")
+  assert(ts ~= nil)
+  assert(ts:IsA("TweenService"))
+
+  local nv = Instance.new("NumberValue")
+  nv.Value = 0
+  local tween = ts:Create(
+    nv,
+    TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),
+    { Value = 100 }
+  )
+  assert(tween ~= nil)
+  assert(tween:IsA("Tween"))
+  assert(tween.Completed ~= nil)
+  tween:Play()
+  assert(tween.PlaybackState == Enum.PlaybackState.Playing or tween.PlaybackState == Enum.PlaybackState.Begin)
+  tween.Completed:Wait()
+  assert(math.abs(nv.Value - 100) < 1)
+  assert(tween.PlaybackState == Enum.PlaybackState.Completed)
+  nv:Destroy()
+end
+
+local function checkTime()
+  local t0 = tick()
+  assert(type(t0) == "number")
+  assert(t0 > 0)
+  task.wait(0.05)
+  local t1 = tick()
+  assert(t1 > t0)
+  assert(math.abs(tick() - os.time()) < 2)
+end
+
+local function yieldOnce()
+  coroutine.yield()
+end
+
+local function checkConstructors()
+  assert(typeof(Vector2.new()) == "Vector2")
+  assert(typeof(Vector3.new()) == "Vector3")
+  assert(typeof(UDim.new()) == "UDim")
+  assert(typeof(UDim2.new()) == "UDim2")
+  assert(typeof(CFrame.new()) == "CFrame")
+  assert(typeof(Color3.new()) == "Color3")
+  assert(typeof(Rect.new()) == "Rect")
+  assert(typeof(NumberRange.new()) == "NumberRange")
+  assert(typeof(NumberSequence.new(0)) == "NumberSequence")
+  assert(typeof(ColorSequence.new(Color3.new())) == "ColorSequence")
+  assert(typeof(Random.new()) == "Random")
+  assert(typeof(RaycastParams.new()) == "RaycastParams")
+  assert(typeof(OverlapParams.new()) == "OverlapParams")
+  assert(typeof(TweenInfo.new()) == "TweenInfo")
+end
+-- WAKE UP, anti tamper leak by @jack3234_
+
+local SETFENV_MSG = "'setfenv' cannot change environment of given object"
+
+local ok1, res1 = pcall(setfenv, string.byte, getfenv(string.byte))
+local ok2, res2 = pcall(setfenv, coroutine.yield, getfenv(string.byte))
+local ok3, res3 = pcall(setfenv, error, getfenv(error))
+if ok1 then
+  fail()
+end
+if ok2 then
+  fail()
+end
+if ok3 then
+  fail()
+end
+expectMessage(res1, SETFENV_MSG)
+expectMessage(res2, SETFENV_MSG)
+expectMessage(res3, SETFENV_MSG)
+
+if game then
+  if Path2DControlPoint and task and task.defer then
+    task.defer(yieldOnce)
+  end
+  if not pcall(checkConstructors) then
+    fail()
+  end
+  if not pcall(checkDataModel) then
+    fail()
+  end
+  if not pcall(checkHttpService) then
+    fail()
+  end
+  if not pcall(checkUserInputService) then
+    fail()
+  end
+  if not pcall(checkUDim2) then
+    fail()
+  end
+  if not pcall(checkVector3) then
+    fail()
+  end
+  if not pcall(checkIntVectors) then
+    fail()
+  end
+  if not pcall(checkUtf8) then
+    fail()
+  end
+  if not pcall(checkWeakTables) then
+    fail()
+  end
+  if not pcall(checkTypes) then
+    fail()
+  end
+  if not pcall(checkTweenInfo) then
+    fail()
+  end
+  if not pcall(checkTweenService) then
+    fail()
+  end
+  if not pcall(checkTime) then
+    fail()
+  end
+  if not pcall(checkTask) then
+    fail()
+  end
+end
+-- pls dont deleted this comment lua :(
+
+if _VERSION == "Luau" then
+  local info = rawget(debug, "info")
+  local dummy = setmetatable({}, { __index = fail })
+  local mtOk, mtRes = pcall(getmetatable, dummy)
+  local indexIsFn = mtOk and type(select(2, mtOk, mtRes).__index) == "function"
+  local rawsetOk = pcall(rawset, {}, " ", " ")
+  local printHasNoMt = not getmetatable(print)
+  local errorHasNoMt = not getmetatable(error)
+  local printArity = ({ info(print, "a") })[1] == 0
+  local tostringArity = ({ info(tostring, "a") })[1] == 0
+  local printIsVararg = ({ info(print, "a") })[2] == true
+  local getfenvC = select(1, pcall(getfenv, 69)) ~= true
+  local printIsC = info(print, "s") == "[C]"
+  local luaFnNotC = info(emptyFn, "s") ~= "[C]"
+  local wrapInfoFails = select(1, pcall(info, coroutine.wrap(emptyFn)(), "[C]")) == false
+
+  for _, ok in {
+    getmetatable,
+    setmetatable,
+    type,
+    select,
+    indexIsFn,
+    pcall,
+    debug,
+    rawget,
+    rawset,
+    rawsetOk,
+    printHasNoMt,
+    errorHasNoMt,
+    printArity,
+    tostringArity,
+    printIsVararg,
+    getfenv,
+    getfenvC,
+    info,
+    printIsC,
+    luaFnNotC,
+    wrapInfoFails,
+  } do
+    if not ok then
+      fail()
+    end
+  end
+end
+-- This anti tamper was leak and deobfuscate by @jack3234 pls donts deleted
