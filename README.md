@@ -11,4 +11,5 @@ And
 > *"Don't copy. Create. Build something better that stands on its own."*
 > fuck u beeatomic
 
-This anti tamper is from the latest version send by @jake3234_, not the old one
+This anti tamper is from the latest sample output obfuscate lightray version send by @jake3234_, not the old one 
+good night:>
